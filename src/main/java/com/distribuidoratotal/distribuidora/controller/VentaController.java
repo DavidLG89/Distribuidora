@@ -1,7 +1,10 @@
 package com.distribuidoratotal.distribuidora.controller;
 
+import com.distribuidoratotal.distribuidora.model.Producto;
 import com.distribuidoratotal.distribuidora.model.Venta;
+import com.distribuidoratotal.distribuidora.model.VentaPorDiaDTO;
 import com.distribuidoratotal.distribuidora.service.IVentaService;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +47,16 @@ public class VentaController {
     @PutMapping("/ventas/editar")
     public Venta editarVenta(@RequestBody Venta venta) {
         return ventaService.editarVenta(venta);
+    }
+    
+    @GetMapping("/ventas/productos/{codigo_venta}")
+    public List<Producto> traerProductosVendidos(@PathVariable Long codigo_venta){
+         Optional<Venta> venta = ventaService.traerVenta(codigo_venta);
+         return venta.get().getListaProductos();
+    }
+    
+    @GetMapping("/ventas/{fecha_venta}")
+    public VentaPorDiaDTO traerVentasPorDia(@PathVariable LocalDate fecha_venta) {
+        return ventaService.traerVentasPorDia(fecha_venta);
     }
 }

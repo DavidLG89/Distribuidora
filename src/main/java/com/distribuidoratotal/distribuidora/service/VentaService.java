@@ -1,7 +1,9 @@
 package com.distribuidoratotal.distribuidora.service;
 
 import com.distribuidoratotal.distribuidora.model.Venta;
+import com.distribuidoratotal.distribuidora.model.VentaPorDiaDTO;
 import com.distribuidoratotal.distribuidora.repository.IVentaRepository;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,23 @@ public class VentaService implements IVentaService{
             return true;
         }
             return false;
+    }
+
+    @Override
+    public VentaPorDiaDTO traerVentasPorDia(LocalDate fecha_venta) {
+        List<Venta> ventasPorDia = repoVenta.traerVentaPorDia(fecha_venta);
+        
+        Long cantidad = ventasPorDia.stream().count();
+        Optional<Double> sumaTotal = ventasPorDia.stream()
+                                    .map(Venta::getTotal)
+                                    .reduce(Double::sum);
+        
+        VentaPorDiaDTO ventaPorDia = new VentaPorDiaDTO();
+        ventaPorDia.setCantidadTotal(cantidad);
+        ventaPorDia.setSumaTotal(sumaTotal.get());
+        ventaPorDia.setFecha(fecha_venta);
+        
+        return ventaPorDia;
     }
     
 }

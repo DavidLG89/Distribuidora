@@ -41,5 +41,10 @@ public class ProductoService implements IProductoService{
         }
             return false;
     }
+
+    @Override
+    public List<Producto> traerBajoStockProductos() {
+        return repoProducto.findLowStock();
+    }
     
 }

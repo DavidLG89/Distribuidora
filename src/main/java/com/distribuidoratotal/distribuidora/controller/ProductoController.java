@@ -47,4 +47,8 @@ public class ProductoController {
         return prodService.editarProducto(producto);
     }
     
+    @GetMapping("/productos/falta_stock")
+    public List<Producto> traerBajoStockProductos() {
+        return prodService.traerBajoStockProductos();
+    }
 }

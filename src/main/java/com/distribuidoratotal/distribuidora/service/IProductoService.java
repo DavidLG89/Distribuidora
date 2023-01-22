@@ -11,4 +11,5 @@ public interface IProductoService {
     public Optional<Producto> traerProducto(Long id);
     public Producto editarProducto(Producto producto);
     public Boolean eliminarProducto(Long id);
+    public List<Producto> traerBajoStockProductos();
 }
