@@ -1,7 +1,6 @@
 package com.distribuidoratotal.distribuidora.repository;
 
 import com.distribuidoratotal.distribuidora.model.Venta;
-import com.distribuidoratotal.distribuidora.model.VentaPorDiaDTO;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;

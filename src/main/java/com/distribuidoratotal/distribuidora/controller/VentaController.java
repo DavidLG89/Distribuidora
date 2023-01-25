@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 //import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,8 +56,8 @@ public class VentaController {
          return venta.get().getListaProductos();
     }
     
-    @GetMapping("/ventas/{fecha_venta}")
-    public VentaPorDiaDTO traerVentasPorDia(@PathVariable LocalDate fecha_venta) {
+    @GetMapping("/ventas/fecha/{fecha_venta}")
+    public VentaPorDiaDTO traerVentasPorDia(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha_venta) {
         return ventaService.traerVentasPorDia(fecha_venta);
     }
 }
